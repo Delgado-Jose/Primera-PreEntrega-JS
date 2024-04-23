@@ -48,17 +48,14 @@ function ingresarLargo(){
     let aLargo = parseInt(prompt("Ingrese el largo deseado para el array:"));
     if(aLargo > 0 ){
         arreglo = new Array(aLargo);
-        alert("ATENCIÓN: Largo establecido correctamente!");
+        alert("AVISO: Largo establecido correctamente!");
     }else{
         alert("*** ERROR ***: Valor incorrecto, ingrese un valor numerico mayor a 0!");
     }        
 }
 function mostrarSubMenuABM(){
+    chequearLugaresDisponibles();
     let subMenu = "::: ABM DE DATOS :::\n 1) Alta.\n 2) Baja.\n 3) Modificación.\n 4) Volver al Menú Principal.\n";
-    let lugar = chequearLugaresDisponibles();
-    if(lugar !== -1){
-        subMenu += "\n\n *** Hay un Lugar Disponible en el Array ***\n Para utilizarlo seleccione la opción 3.";
-    }
     let opcionABM = prompt(subMenu+"\nIngrese una opción:");
     if(opcionABM === null){
         opcionABM = "4";
@@ -68,10 +65,10 @@ function mostrarSubMenuABM(){
             agregarDato();
             break;
         case "2":
-            darBajaDato();
+            EliminarDato();
             break;
         case "3":
-            modificarDato(lugar);
+            modificarDato();
             break;
         case "4":
             break;
@@ -83,19 +80,12 @@ function mostrarSubMenuABM(){
 }
 function agregarDato(){
     for(let i=0;i<arreglo.length;i++){
-        arreglo[i]=prompt("Ingrese un dato:  (Lugares Utilizados: "+i+" de "+arreglo.length);
+        arreglo[i]=prompt("Ingrese un dato:  (Lugares Utilizados: "+i+" de "+arreglo.length+")");
     }
 }
-function modificarDato(lugar){    
-    if(lugar !== -1){
-        let opcion = confirm("ATENCIÓN: Hay un Lugar Disponible en el Array, ¿Desea Utiizarlo?")
-        if(opcion){
-            arreglo[lugar]=prompt("Ingrese el nuevo dato:");
-            return;
-        }        
-    }
-    opcion = confirm("ATENCIÓN: ¿Realmente Desea Modificar un Dato?");
-    if(opcion){
+function modificarDato(lugar){
+    opcionModificar = confirm("ATENCIÓN: ¿Realmente Desea Modificar un Dato?");
+    if(opcionModificar){
         mostrarArray();
         let datoActual = prompt("Dato a sustituir:");
         let datoNuevo = prompt("Nuevo dato:");
@@ -103,7 +93,7 @@ function modificarDato(lugar){
         for(let i=0;i<arreglo.length;i++){
             if(datoActual === arreglo[i]){
                 arreglo[i]=datoNuevo;
-                alert("ATENCIÓN: Dato actualizado correctamente!");
+                alert("AVISO: Dato actualizado correctamente!");
                 encontrado= true;
                 break;
             }
@@ -113,7 +103,7 @@ function modificarDato(lugar){
         } 
     }
 }
-function darBajaDato(){
+function EliminarDato(){
     mostrarArray();
     let datoAbajar = prompt("Ingrese el Dato a Dar de Baja:");
     let encontrado = false;
@@ -122,10 +112,10 @@ function darBajaDato(){
             if(confirm("ATENCIÓN: Dato Encontrado, ¿Desea Continuar con la Baja?")){
                 arreglo[i]="";
                 encontrado=true;
-                alert("ATENCIÓN: Baja Realizada Correctamente!");
+                alert("AVISO: Baja Realizada Correctamente!");
                 break;
             }else{
-                alert("ATENCIÓN: Baja Cancelada.");
+                alert("AVISO: Baja Cancelada.");
                 break;
             }            
         }
@@ -137,13 +127,21 @@ function darBajaDato(){
 function chequearLugaresDisponibles(){
     for(let i = 0;i<arreglo.length;i++){
         if(arreglo[i] === ""){
-            return i;
+            let opcionLugar = prompt("::: LUGAR LIBRE ::: \n Hay un Lugar Disponible en el Array.\n ¿Desea Utilizarlo? s/n");
+            if(opcionLugar === "s"){
+                arreglo[i]=prompt("Ingrese el nuevo dato:");
+                alert("AVISO: Dato ingresado correctamente.");
+            }else if(opcionLugar === "n"){
+                alert("AVISO: No se realizaron cambios, el lugar queda disponible.")
+                return;
+            }else{
+                alert("*** ERROR ***: No ha ingresado una opción válida!");
+            }
         }
-    }
-    return -1;
+    }    
 }
 function mostrarArray(){
-    alert("Datos Actualmente Cargados:\n\n  [ "+arreglo.join(" | ")+" ]");
+    alert("::: ARRAY :::\n\n  [ "+arreglo.join(" | ")+" ]");
 }
 function buscarDatos(){
     let dato = prompt("Dato a buscar:");
@@ -180,6 +178,6 @@ function ordenarArray(tipo){
     }else if(tipo === "cadena"){
         arreglo.sort();
     }
-    alert("Array Ordenado!\n[ "+arreglo.join(" | ")+" ]");
+    alert("AVISO: Array Ordenado!\n[ "+arreglo.join(" | ")+" ]");
 }
 
