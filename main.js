@@ -3,7 +3,7 @@ let opcion ="";
 
 while(opcion !== "0"){
     opcion = mostrarMenu();
-    if((arreglo.length === 0)&&(opcion!=="1")){
+    if((arreglo.length === 0)&&(opcion!=="1")&&(opcion !=="0")){
         alert("*** ERROR ***: Debe ingresar el largo del array!");
     }else{
         switch(opcion){
@@ -21,7 +21,6 @@ while(opcion !== "0"){
                 break;
             case "5":
                 verificarTipoDatos();
-                //ordenarArray();
                 break;
             case "0":
                 alert("Gracias por Utilizar Este Software!");
@@ -159,7 +158,6 @@ function verificarTipoDatos(){
     let datosNumericos = true;
     let datosCadena = true;
     let numero = 0;
-    //debugger
     for(let i=0;i<arreglo.length;i++){
         numero = parseFloat(arreglo[i]);
         if(isNaN(numero)){
