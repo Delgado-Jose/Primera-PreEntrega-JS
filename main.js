@@ -65,7 +65,7 @@ function mostrarSubMenuABM(){
             agregarDato();
             break;
         case "2":
-            EliminarDato();
+            eliminarDato();
             break;
         case "3":
             modificarDato();
@@ -103,7 +103,7 @@ function modificarDato(lugar){
         } 
     }
 }
-function EliminarDato(){
+function eliminarDato(){
     mostrarArray();
     let datoAbajar = prompt("Ingrese el Dato a Dar de Baja:");
     let encontrado = false;
