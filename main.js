@@ -83,7 +83,7 @@ function agregarDato(){
         arreglo[i]=prompt("Ingrese un dato:  (Lugares Utilizados: "+i+" de "+arreglo.length+")");
     }
 }
-function modificarDato(lugar){
+function modificarDato(){
     opcionModificar = confirm("ATENCIÓN: ¿Realmente Desea Modificar un Dato?");
     if(opcionModificar){
         mostrarArray();
